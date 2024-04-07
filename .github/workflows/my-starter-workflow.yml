@@ -6,7 +6,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -15,6 +14,10 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy to your project.
   call-reusable-workflow:
+    strategy:
+      matrix:
+        nodeversion: [14,16,18,20]
     uses: ./.github/workflows/reusable-workflow.yml
     with:
-      node: 14
+      node: ${{ matrix.nodeversion }}
+      
